@@ -1,0 +1,2 @@
+[remote_machine]
+weatherapp ansible_ssh_host=APP_HOST ansible_ssh_port=22 ansible_ssh_user='matejc' ansible_ssh_private_key_file=HOST_PRIVATE_KEY
