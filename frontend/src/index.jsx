@@ -3,15 +3,59 @@ import ReactDOM from 'react-dom';
 
 const baseURL = process.env.ENDPOINT;
 
-const getWeatherFromApi = async () => {
+const getWeatherFromApi = async (latitude, longitude) => {
   try {
-    const response = await fetch(`${baseURL}/weather`);
+    const response = await fetch(`${baseURL}/weather?latitude=${latitude}&longitude=${longitude}`);
     return response.json();
   } catch (error) {
-    console.error(error);
+    console.error(error);  // eslint-disable-line
   }
 
   return {};
+};
+
+const getForecastFromApi = async (latitude, longitude) => {
+  try {
+    const response = await fetch(`${baseURL}/forecast?latitude=${latitude}&longitude=${longitude}`);
+    return response.json();
+  } catch (error) {
+    console.error(error);  // eslint-disable-line
+  }
+
+  return {};
+};
+
+const getLocation = async () => {
+  const options = {
+    maximumAge:60000,
+    timeout:5000,
+    enableHighAccuracy:true
+  };
+  try {
+    const loc = await new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    });
+    if (loc && loc.latitude && loc.longitude) {
+      return loc;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);  // eslint-disable-line
+    return null;
+  }
+};
+
+const getLocationByIpInfo = async () => {
+  try {
+    const response = await fetch('https://ipinfo.io/geo');
+    const res = await response.json();
+    const loc = res.loc.split(',');
+    return { latitude: loc[0], longitude: loc[1] };
+  } catch (error) {
+    console.warn(error);  // eslint-disable-line
+    return null;
+  }
 };
 
 class Weather extends React.Component {
@@ -19,21 +63,49 @@ class Weather extends React.Component {
     super(props);
 
     this.state = {
-      icon: "",
+      name: '',
+      weather: '',
+      forecast: [],
     };
   }
 
   async componentWillMount() {
-    const weather = await getWeatherFromApi();
-    this.setState({icon: weather.icon.slice(0, -1)});
+    const loc = await getLocation() || await getLocationByIpInfo();
+    const weatherData = await getWeatherFromApi(loc.latitude, loc.longitude);
+    const forecastData = await getForecastFromApi(loc.latitude, loc.longitude);
+
+    const forecast = [];
+    forecast.push(forecastData.forecast[0].icon.slice(0, -1));
+    forecast.push(forecastData.forecast[1].icon.slice(0, -1));
+    forecast.push(forecastData.forecast[2].icon.slice(0, -1));
+    forecast.push(forecastData.forecast[3].icon.slice(0, -1));
+    forecast.push(forecastData.forecast[4].icon.slice(0, -1));
+
+    this.setState({
+      name: weatherData.name,
+      weather: weatherData.weather.icon.slice(0, -1),
+      forecast,
+    });
   }
 
   render() {
-    const { icon } = this.state;
+    const { name, weather, forecast } = this.state;
 
     return (
-      <div className="icon">
-        { icon && <img src={`/img/${icon}.svg`} /> }
+      <div className="container">
+        <div className="location">
+          { name }
+        </div>
+        <div className="icon">
+          { weather && <img alt="N/A" src={`/img/${weather}.svg`} /> }
+        </div>
+        <div className="forecast-container">
+          { forecast[0] && <img alt="N/A" src={`/img/${forecast[0]}.svg`} /> }
+          { forecast[1] && <img alt="N/A" src={`/img/${forecast[1]}.svg`} /> }
+          { forecast[2] && <img alt="N/A" src={`/img/${forecast[2]}.svg`} /> }
+          { forecast[3] && <img alt="N/A" src={`/img/${forecast[3]}.svg`} /> }
+          { forecast[4] && <img alt="N/A" src={`/img/${forecast[4]}.svg`} /> }
+        </div>
       </div>
     );
   }

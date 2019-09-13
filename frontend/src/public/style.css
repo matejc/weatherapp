@@ -9,6 +9,25 @@ body{
 }
 
 .icon {
-  width: 30vw;
-  height: 30vw;
+  width: 25vw;
+  height: 25vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.forecast-container img {
+  display: inline-block;
+  height: 10vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.location {
+  font-variant: small-caps;
+  font-size: 5vw;
+  margin-bottom: 5vw;
+}
+
+.container {
+    text-align: center;
 }
