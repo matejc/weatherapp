@@ -15,8 +15,8 @@ services:
       - "8000:8000"
     networks:
       - app
-    env_file:
-      - ./weatherapp.env
+    environment:
+      ENDPOINT: "https://weather.matejc.com/api"
     depends_on:
       - backend
 

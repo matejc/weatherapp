@@ -15,11 +15,20 @@ body{
   margin-right: auto;
 }
 
-.forecast-container img {
+.forecast-container div {
   display: inline-block;
   height: 10vw;
   margin-left: 1vw;
   margin-right: 1vw;
+}
+
+.forecast-container div img {
+  height: 8vw;
+  display: block;
+}
+
+.forecast-container div div {
+  margin-top: 1vw;
 }
 
 .location {

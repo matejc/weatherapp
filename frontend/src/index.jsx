@@ -27,9 +27,9 @@ const getForecastFromApi = async (latitude, longitude) => {
 
 const getLocation = async () => {
   const options = {
-    maximumAge:60000,
-    timeout:5000,
-    enableHighAccuracy:true
+    maximumAge: 60000,
+    timeout: 5000,
+    enableHighAccuracy: true,
   };
   try {
     const loc = await new Promise((resolve, reject) => {
@@ -70,7 +70,7 @@ class Weather extends React.Component {
   }
 
   async componentWillMount() {
-    const loc = await getLocation() || await getLocationByIpInfo();
+    const loc = await getLocation() || await getLocationByIpInfo() || { latitude: 0, longitude: 0 };
     const weatherData = await getWeatherFromApi(loc.latitude, loc.longitude);
     const forecastData = await getForecastFromApi(loc.latitude, loc.longitude);
 
@@ -100,11 +100,11 @@ class Weather extends React.Component {
           { weather && <img alt="N/A" src={`/img/${weather}.svg`} /> }
         </div>
         <div className="forecast-container">
-          { forecast[0] && <img alt="N/A" src={`/img/${forecast[0]}.svg`} /> }
-          { forecast[1] && <img alt="N/A" src={`/img/${forecast[1]}.svg`} /> }
-          { forecast[2] && <img alt="N/A" src={`/img/${forecast[2]}.svg`} /> }
-          { forecast[3] && <img alt="N/A" src={`/img/${forecast[3]}.svg`} /> }
-          { forecast[4] && <img alt="N/A" src={`/img/${forecast[4]}.svg`} /> }
+          { forecast[0] && <div><img alt="N/A" src={`/img/${forecast[0]}.svg`} /><div>+3h</div></div> }
+          { forecast[1] && <div><img alt="N/A" src={`/img/${forecast[1]}.svg`} /><div>+6h</div></div> }
+          { forecast[2] && <div><img alt="N/A" src={`/img/${forecast[2]}.svg`} /><div>+9h</div></div> }
+          { forecast[3] && <div><img alt="N/A" src={`/img/${forecast[3]}.svg`} /><div>+12h</div></div> }
+          { forecast[4] && <div><img alt="N/A" src={`/img/${forecast[4]}.svg`} /><div>+15h</div></div> }
         </div>
       </div>
     );

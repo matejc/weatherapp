@@ -29,7 +29,7 @@
     - name: Copy weatherapp backend src
       copy:
         src: backend/src
-        dest: backend/src
+        dest: backend/
 
     - name: Copy weatherapp backend package.json
       copy:
@@ -39,7 +39,7 @@
     - name: Copy weatherapp frontend src
       copy:
         src: frontend/src
-        dest: frontend/src
+        dest: frontend/
 
     - name: Copy weatherapp frontend package.json
       copy:
@@ -55,6 +55,11 @@
       copy:
         src: "docker-compose.yml"
         dest: "docker-compose.yml"
+
+    - name: Copy weatherapp env file
+      copy:
+        src: weatherapp.env
+        dest: weatherapp.env
 
     - name: Tear down app
       docker_compose:
