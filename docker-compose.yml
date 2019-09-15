@@ -7,16 +7,16 @@ services:
       - "9000:9000"
     networks:
       - app
-    environment:
-      APPID: "ENTER YOUR APPID"
+    env_file:
+      - ./weatherapp.env
   frontend:
     build: frontend
     ports:
       - "8000:8000"
     networks:
       - app
-    environment:
-      ENDPOINT: "https://weather.matejc.com/api"
+    env_file:
+      - ./weatherapp.env
     depends_on:
       - backend
 

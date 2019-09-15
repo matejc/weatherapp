@@ -26,15 +26,30 @@
     - name: Install docker-compose
       apt: name=docker-compose state=latest
 
-    - name: Copy weatherapp backend
+    - name: Copy weatherapp backend src
       copy:
-        src: backend
-        dest: .
+        src: backend/src
+        dest: backend/src
 
-    - name: Copy weatherapp frontend
+    - name: Copy weatherapp backend package.json
       copy:
-        src: frontend
-        dest: .
+        src: backend/package.json
+        dest: backend/package.json
+
+    - name: Copy weatherapp frontend src
+      copy:
+        src: frontend/src
+        dest: frontend/src
+
+    - name: Copy weatherapp frontend package.json
+      copy:
+        src: frontend/package.json
+        dest: frontend/package.json
+
+    - name: Copy weatherapp frontend webpack
+      copy:
+        src: frontend/webpack.config.js
+        dest: frontend/webpack.config.js
 
     - name: Copy weatherapp docker-compose.yml
       copy:

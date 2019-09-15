@@ -1,0 +1,2 @@
+hosts filter=git-crypt diff=git-crypt
+weatherapp.env filter=git-crypt diff=git-crypt
