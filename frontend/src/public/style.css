@@ -28,12 +28,16 @@ body{
 }
 
 .forecast-container div div {
+  font-family: sans-serif;
+  font-variant: small-caps;
+  font-weight: bold;
   margin-top: 1vw;
 }
 
 .location {
-  font-variant: small-caps;
+  font-family: sans-serif;
   font-size: 5vw;
+  font-variant: small-caps;
   margin-bottom: 5vw;
 }
 

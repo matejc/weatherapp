@@ -100,11 +100,11 @@ class Weather extends React.Component {
           { weather && <img alt="N/A" src={`/img/${weather}.svg`} /> }
         </div>
         <div className="forecast-container">
-          { forecast[0] && <div><img alt="N/A" src={`/img/${forecast[0]}.svg`} /><div>+3h</div></div> }
-          { forecast[1] && <div><img alt="N/A" src={`/img/${forecast[1]}.svg`} /><div>+6h</div></div> }
-          { forecast[2] && <div><img alt="N/A" src={`/img/${forecast[2]}.svg`} /><div>+9h</div></div> }
-          { forecast[3] && <div><img alt="N/A" src={`/img/${forecast[3]}.svg`} /><div>+12h</div></div> }
-          { forecast[4] && <div><img alt="N/A" src={`/img/${forecast[4]}.svg`} /><div>+15h</div></div> }
+          { forecast[0] && <div><img alt="N/A" src={`/img/${forecast[0]}.svg`} /><div>+ 3 h</div></div> }
+          { forecast[1] && <div><img alt="N/A" src={`/img/${forecast[1]}.svg`} /><div>+ 6 h</div></div> }
+          { forecast[2] && <div><img alt="N/A" src={`/img/${forecast[2]}.svg`} /><div>+ 9 h</div></div> }
+          { forecast[3] && <div><img alt="N/A" src={`/img/${forecast[3]}.svg`} /><div>+ 12 h</div></div> }
+          { forecast[4] && <div><img alt="N/A" src={`/img/${forecast[4]}.svg`} /><div>+ 15 h</div></div> }
         </div>
       </div>
     );
