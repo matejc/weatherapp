@@ -1,5 +1,9 @@
 server {
-    listen 80;
+    listen 443 ssl;
+    ssl_certificate /etc/ssl/private/letsencrypt-domain.pem;
+    ssl_certificate_key /etc/ssl/private/letsencrypt-domain.key;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
     server_name weather.matejc.com;
 
     access_log /var/log/nginx/weatherapp.access.log;

@@ -86,3 +86,17 @@
       service:
         name: nginx
         state: restarted
+
+    - name: Install acme-nginx
+      pip:
+        name: acme-nginx
+
+    - name: Run acme-nginx
+      become: yes
+      command: acme-nginx -d weather.matejc.com
+
+    - name: Cron for acme-nginx
+      cron:
+        name: "ssl renewal"
+        special_time: monthly
+        job: "timeout -k 600 -s 9 3600 /usr/local/bin/acme-nginx -d weather.matejc.com >> /var/log/letsencrypt.log 2>&1 || echo 'Failed to renew certificate'"
