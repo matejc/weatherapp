@@ -97,11 +97,11 @@ class Weather extends React.Component {
         <div className="location">
           { name }
         </div>
-        <div className="icon">
-          { weather && <img alt="N/A" src={`/img/${weather}.svg`} /> }
-        </div>
         <div className="temperature">
           { weather && `${temp} °C` }
+        </div>
+        <div className="icon">
+          { weather && <img alt="N/A" src={`/img/${weather}.svg`} /> }
         </div>
         <div className="forecast-container">
           { forecast[0] && <div><img alt="N/A" src={`/img/${forecast[0]}.svg`} /><div>+ 3 h</div></div> }
