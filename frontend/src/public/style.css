@@ -41,6 +41,13 @@ body{
   margin-bottom: 5vw;
 }
 
+.temperature {
+  font-family: sans-serif;
+  font-size: 4vw;
+  font-variant: small-caps;
+  margin-bottom: 5vw;
+}
+
 .container {
     text-align: center;
 }

@@ -84,12 +84,13 @@ class Weather extends React.Component {
     this.setState({
       name: weatherData.name,
       weather: weatherData.weather.icon.slice(0, -1),
+      temp: weatherData.temp,
       forecast,
     });
   }
 
   render() {
-    const { name, weather, forecast } = this.state;
+    const { name, weather, temp, forecast } = this.state;
 
     return (
       <div className="container">
@@ -98,6 +99,9 @@ class Weather extends React.Component {
         </div>
         <div className="icon">
           { weather && <img alt="N/A" src={`/img/${weather}.svg`} /> }
+        </div>
+        <div className="temperature">
+          { weather && `${temp} °C` }
         </div>
         <div className="forecast-container">
           { forecast[0] && <div><img alt="N/A" src={`/img/${forecast[0]}.svg`} /><div>+ 3 h</div></div> }

@@ -1,4 +1,4 @@
-const debug = require('debug')('weathermap');
+const debug = require('debug')('weatherapp');
 
 const Koa = require('koa');
 const router = require('koa-router')();
@@ -14,8 +14,8 @@ const app = new Koa();
 
 app.use(cors());
 
-const fetchWeather = async (latitude, longitude) => {
-  const endpoint = `${mapURI}/weather?lat=${latitude}&lon=${longitude}&appid=${appId}`;
+async function fetchWeather (latitude, longitude) {
+  const endpoint = `${mapURI}/weather?lat=${latitude}&lon=${longitude}&appid=${appId}&units=metric`;
   const response = await fetch(endpoint);
 
   return response ? response.json() : {};
@@ -36,6 +36,7 @@ router.get('/api/weather', async ctx => {
   ctx.body = {
     name: weatherData.name,
     weather: weatherData.weather ? weatherData.weather[0] : {},
+    temp: weatherData.main ? weatherData.main.temp : null,
   };
 });
 
