@@ -22,7 +22,7 @@ async function fetchWeather (latitude, longitude) {
 };
 
 const fetchForecast = async (latitude, longitude) => {
-  const endpoint = `${mapURI}/forecast?lat=${latitude}&lon=${longitude}&appid=${appId}`;
+  const endpoint = `${mapURI}/forecast?lat=${latitude}&lon=${longitude}&appid=${appId}&units=metric`;
   const response = await fetch(endpoint);
 
   return response ? response.json() : {};
@@ -51,7 +51,10 @@ router.get('/api/forecast', async ctx => {
   };
 
   for (const item of forecastData.list.splice(0, 5)) {
-    ctx.body.forecast.push(item.weather ? item.weather[0] : {});
+    ctx.body.forecast.push({
+      weather: item.weather ? item.weather[0] : {},
+      main: item.main
+    });
   }
 });
 

@@ -74,18 +74,20 @@ class Weather extends React.Component {
     const weatherData = await getWeatherFromApi(loc.latitude, loc.longitude);
     const forecastData = await getForecastFromApi(loc.latitude, loc.longitude);
 
-    const forecast = [];
-    forecast.push(forecastData.forecast[0].icon.slice(0, -1));
-    forecast.push(forecastData.forecast[1].icon.slice(0, -1));
-    forecast.push(forecastData.forecast[2].icon.slice(0, -1));
-    forecast.push(forecastData.forecast[3].icon.slice(0, -1));
-    forecast.push(forecastData.forecast[4].icon.slice(0, -1));
+    const forecasts = [];
+    for (let i = 0; i < forecastData.forecast.length; i++) {
+        let forecast = forecastData.forecast[i];
+        forecasts.push({
+            icon: forecast.weather.icon.slice(0, -1),
+            temp: Math.round(forecast.main.temp)
+        });
+    }
 
     this.setState({
       name: weatherData.name,
       weather: weatherData.weather.icon.slice(0, -1),
-      temp: weatherData.temp,
-      forecast,
+      temp: Math.round(weatherData.temp),
+      forecast: forecasts,
     });
   }
 
@@ -104,11 +106,11 @@ class Weather extends React.Component {
           { weather && <img alt="N/A" src={`/img/${weather}.svg`} /> }
         </div>
         <div className="forecast-container">
-          { forecast[0] && <div><img alt="N/A" src={`/img/${forecast[0]}.svg`} /><div>+ 3 h</div></div> }
-          { forecast[1] && <div><img alt="N/A" src={`/img/${forecast[1]}.svg`} /><div>+ 6 h</div></div> }
-          { forecast[2] && <div><img alt="N/A" src={`/img/${forecast[2]}.svg`} /><div>+ 9 h</div></div> }
-          { forecast[3] && <div><img alt="N/A" src={`/img/${forecast[3]}.svg`} /><div>+ 12 h</div></div> }
-          { forecast[4] && <div><img alt="N/A" src={`/img/${forecast[4]}.svg`} /><div>+ 15 h</div></div> }
+          { forecast[0] && <div><img alt="N/A" src={`/img/${forecast[0].icon}.svg`} /><div>{`${forecast[0].temp}°C`}</div></div> }
+          { forecast[1] && <div><img alt="N/A" src={`/img/${forecast[1].icon}.svg`} /><div>{`${forecast[0].temp}°C`}</div></div> }
+          { forecast[2] && <div><img alt="N/A" src={`/img/${forecast[2].icon}.svg`} /><div>{`${forecast[0].temp}°C`}</div></div> }
+          { forecast[3] && <div><img alt="N/A" src={`/img/${forecast[3].icon}.svg`} /><div>{`${forecast[0].temp}°C`}</div></div> }
+          { forecast[4] && <div><img alt="N/A" src={`/img/${forecast[4].icon}.svg`} /><div>{`${forecast[0].temp}°C`}</div></div> }
         </div>
       </div>
     );
