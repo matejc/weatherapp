@@ -107,10 +107,10 @@ class Weather extends React.Component {
         </div>
         <div className="forecast-container">
           { forecast[0] && <div><img alt="N/A" src={`/img/${forecast[0].icon}.svg`} /><div>{`${forecast[0].temp}°C`}</div></div> }
-          { forecast[1] && <div><img alt="N/A" src={`/img/${forecast[1].icon}.svg`} /><div>{`${forecast[0].temp}°C`}</div></div> }
-          { forecast[2] && <div><img alt="N/A" src={`/img/${forecast[2].icon}.svg`} /><div>{`${forecast[0].temp}°C`}</div></div> }
-          { forecast[3] && <div><img alt="N/A" src={`/img/${forecast[3].icon}.svg`} /><div>{`${forecast[0].temp}°C`}</div></div> }
-          { forecast[4] && <div><img alt="N/A" src={`/img/${forecast[4].icon}.svg`} /><div>{`${forecast[0].temp}°C`}</div></div> }
+          { forecast[1] && <div><img alt="N/A" src={`/img/${forecast[1].icon}.svg`} /><div>{`${forecast[1].temp}°C`}</div></div> }
+          { forecast[2] && <div><img alt="N/A" src={`/img/${forecast[2].icon}.svg`} /><div>{`${forecast[2].temp}°C`}</div></div> }
+          { forecast[3] && <div><img alt="N/A" src={`/img/${forecast[3].icon}.svg`} /><div>{`${forecast[3].temp}°C`}</div></div> }
+          { forecast[4] && <div><img alt="N/A" src={`/img/${forecast[4].icon}.svg`} /><div>{`${forecast[4].temp}°C`}</div></div> }
         </div>
       </div>
     );
